@@ -19,7 +19,6 @@ const Total =( {items} ) => {
     <div className="total">
       <p>Total length: {items.map(i => i.exercises).reduce((p, n) => p + n, 0)} </p>
     </div>
-
   )
 }
 
@@ -41,7 +40,5 @@ const App = () => {
     </div>
   )
 }
-
-
 
 export default App;
