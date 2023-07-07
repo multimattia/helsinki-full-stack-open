@@ -9,7 +9,7 @@ const Header = ( {course} ) => {
 const Content = ( {items} ) => {
   return (
     <div className="content">
-      { items.map(course => <p>{course.name} - no. of exercises: {course.exercises}</p>) }
+      { items.map(course => <p key={course.name}>{course.name} - no. of exercises: {course.exercises}</p>) }
     </div>
   )
 }
@@ -24,25 +24,20 @@ const Total =( {items} ) => {
 }
 
 const App = () => {
-  const courseTitle = 'Half Stack application development'
-  
-  const parts = [
-    {name: 'Fundamentals of React', exercises: 10},
-    {name: 'Using props to pass data', exercises: 7},
-    {name: 'State of a component', exercises: 14}
-  ]
-  
-  const list = [
-    {exercises: 1},
-    {exercises: 2},
-    {exercises: 3}
-  ]
+  const course = {
+    title : 'Half Stack application development',
+    parts : [
+      {name: 'Fundamentals of React', exercises: 10},
+      {name: 'Using props to pass data', exercises: 7},
+      {name: 'State of a component', exercises: 14}
+    ]
+  }
 
   return (
     <div>
-      <Header course={courseTitle} />
-      <Content items={parts} />
-      <Total items={parts} />
+      <Header course={course.title} />
+      <Content items={course.parts} />
+      <Total items={course.parts} />
     </div>
   )
 }
