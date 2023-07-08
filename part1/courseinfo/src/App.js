@@ -13,6 +13,9 @@ const Courses = ({ course }) => {
           <Part key={part.id} name={part.name} exercises={part.exercises}/>
         )}
       </ul>
+      <p>Total: {
+        course.parts.map(part => part.exercises).reduce((p, c) => p + c)
+        }</p>
     </div>
   )
 }
