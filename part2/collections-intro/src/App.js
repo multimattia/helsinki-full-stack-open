@@ -1,16 +1,14 @@
-const Note = ({ notes }) => (
-  <div className="">
-    <h1>Notes</h1>
-    <ul>
-      {notes.map(note => <li key={note.id}>{note.content}</li>)}
-    </ul>
-  </div>
+const Note = ({ note }) => (
+  <li>{note.content}</li>
 )
 
 const App = ({ notes }) => {
   return (
     <div className="App">
-      <Note notes={notes} />
+      <h1>Notes</h1>
+      <ul>
+        {notes.map(note => <Note key={note.id} note={note} />)}
+      </ul>
     </div>
   );
 }
