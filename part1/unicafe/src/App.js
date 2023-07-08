@@ -8,6 +8,22 @@ const Button = ({ handleClick, text }) => (
   <button onClick={handleClick}>{text}</button>
 )
 
+const Stats = ({ good, neutral, bad, total, positive, average }) => {
+  if (total === 0) {
+    return (<p>No feedback given.</p>)
+  }
+  return (
+    <div className="Stats">
+      <p>Good: {good}</p>
+      <p>Neutral: {neutral}</p>
+      <p>Bad: {bad}</p>
+      <p>Total: {total}</p>
+      <p>Positive: {positive} %</p>
+      <p>Average: {average}</p>
+    </div>
+  )
+}
+
 const App = () => {
   
   const [goodNo, setGoodNo] = useState(0)
@@ -64,12 +80,13 @@ const App = () => {
       <Button handleClick={addNeutral} text="Neutral" />
       <Button handleClick={addBad} text="Bad" />
       <Header text="Statistics" />
-      <p>Good: {goodNo}</p>
-      <p>Neutral: {neutralNo}</p>
-      <p>Bad: {badNo}</p>
-      <p>Total: {totalNo}</p>
-      <p>Positive: {positiveNo} %</p>
-      <p>Average: {averageNo}</p>
+      <Stats 
+        good={goodNo}
+        neutral={neutralNo}
+        bad={badNo}
+        total={totalNo} 
+        average={averageNo} 
+        positive={positiveNo} />
     </div>
   );
 }
