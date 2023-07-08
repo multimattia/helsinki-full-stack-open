@@ -1,44 +1,47 @@
-const Header = ( {course} ) => {
+const Part = ({ name, exercises }) => {
   return (
-    <div>
-      <h1>{course}</h1>
-    </div>
+    <li>{name}: {exercises} exercises</li>
   )
 }
 
-const Content = ( {items} ) => {
+const Courses = ({ course }) => {
   return (
-    <div className="content">
-      { items.map(course => <p key={course.name}>{course.name} - no. of exercises: {course.exercises}</p>) }
-    </div>
-  )
-}
-
-const Total =( {items} ) => {
-  return (
-    <div className="total">
-      <p>Total length: {items.map(i => i.exercises).reduce((p, n) => p + n, 0)} </p>
+    <div className="">
+      <h1>{course.name}</h1>
+      <ul>
+        {course.parts.map(part =>
+          <Part key={part.id} name={part.name} exercises={part.exercises}/>
+        )}
+      </ul>
     </div>
   )
 }
 
 const App = () => {
-  const course = {
-    title : 'Half Stack application development',
-    parts : [
-      {name: 'Fundamentals of React', exercises: 10},
-      {name: 'Using props to pass data', exercises: 7},
-      {name: 'State of a component', exercises: 14}
+  const courseList = {
+    id: 1,
+    name: 'Half Stack application development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10,
+        id: 1
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7,
+        id: 2
+      },
+      {
+        name: 'State of a component',
+        exercises: 14,
+        id: 3
+      }
     ]
   }
-
-  return (
-    <div>
-      <Header course={course.title} />
-      <Content items={course.parts} />
-      <Total items={course.parts} />
-    </div>
-  )
+  
+  console.log("app:", courseList);
+  return <Courses course={courseList} />
 }
 
-export default App;
+export default App
