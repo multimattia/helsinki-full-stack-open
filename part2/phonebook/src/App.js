@@ -7,7 +7,7 @@ const PeopleList = ({ people, filter }) => {
   }
   return (
     <div className="">
-      <h1>Numbers</h1>
+      <h2>Numbers</h2>
       <div>
         {people.map(({ id, name, number }) => <p key={id}>Name: {name} {number}</p>)}
       </div>
@@ -46,25 +46,28 @@ const PhoneForm = ({
     }
   }
   return (
-    <form onSubmit={addNewPerson}>
-      <div>
-        name:
-        <input
-          value={newName}
-          onChange={handleNameChange}
-        />
-      </div>
-      <div className="">
-        phoneNumber:
-        <input
-          value={newPhoneNumber}
-          onChange={handleNumberChange}
-        />
-      </div>
-      <div className="">
-        <button type="submit">add</button>
-      </div>
-    </form>
+    <div>
+      <h2>Add a new number:</h2>
+      <form onSubmit={addNewPerson}>
+        <div>
+          name:
+          <input
+            value={newName}
+            onChange={handleNameChange}
+          />
+        </div>
+        <div className="">
+          phoneNumber:
+          <input
+            value={newPhoneNumber}
+            onChange={handleNumberChange}
+          />
+        </div>
+        <div className="">
+          <button type="submit">add</button>
+        </div>
+      </form>
+    </div>
   )
 }
 
@@ -110,7 +113,6 @@ const App = () => {
         setNewPhoneNumber={setNewPhoneNumber}
       />
       <PeopleList people={persons} filter={filter}/>
-      <p>filter: {filter}</p>
     </div>
   );
 }
