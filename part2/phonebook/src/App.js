@@ -1,9 +1,16 @@
 import { useState } from 'react'
 
-const PeopleList = ({ people }) => {
+const PeopleList = ({ people, filter }) => {
+  if (filter !== '') {
+    people = people.filter(word =>
+      word.name.toLowerCase().includes(filter.toLowerCase()))
+  }
   return (
-    <div className=" ">
-      {people.map(person => <p key={person.id}>Name: {person.name} {person.number}</p>)}
+    <div className="">
+      <h1>Numbers</h1>
+      <div>
+        {people.map(({ id, name, number }) => <p key={id}>Name: {name} {number}</p>)}
+      </div>
     </div>
   )
 }
@@ -40,7 +47,7 @@ const PhoneForm = ({
   }
   return (
     <form onSubmit={addNewPerson}>
-      <div className="">
+      <div>
         name:
         <input
           value={newName}
@@ -61,15 +68,39 @@ const PhoneForm = ({
   )
 }
 
+const FilterForm = ({ filter, setFilter }) => {
+  const handleFilterChange = (event) => {
+    setFilter(event.target.value)
+  }
+  return (
+    <div>
+      Filter shown with 
+      <input 
+        value={filter}
+        onChange={handleFilterChange}
+      />
+    </div>
+  )
+}
+
 
 const App = () => {
-  const [persons, setPersons] = useState([])
+  const [persons, setPersons] = useState([
+    { name: 'Arto Hellas', number: '040-123456', id: 1 },
+    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
+    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
+    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
+  ])
+  const [filter, setFilter] = useState('')
   const [newName, setNewName] = useState('')
   const [newPhoneNumber, setNewPhoneNumber] = useState('')
 
   return (
     <div className="App">
-      <h2>Numbers</h2>
+      <h1>Phonebook</h1>
+      <FilterForm
+        filter={filter}
+        setFilter={setFilter} />
       <PhoneForm
         persons={persons}
         setPersons={setPersons}
@@ -78,7 +109,8 @@ const App = () => {
         newPhoneNumber={newPhoneNumber}
         setNewPhoneNumber={setNewPhoneNumber}
       />
-      <PeopleList people={persons} />
+      <PeopleList people={persons} filter={filter}/>
+      <p>filter: {filter}</p>
     </div>
   );
 }
